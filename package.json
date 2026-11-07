@@ -1,0 +1,58 @@
+{
+  "name": "dsh-workspace-organizer",
+  "version": "0.5.0",
+  "description": "接管 DSH 侧边栏工作区浏览器：工作区 → 文件夹（可折叠，虚拟容器）→ 会话的原生树，另有跨工作区移动、删除项目（回收站 / 仅移除注册 / 彻底删除）与成本展示（文件夹小计 / 工作区总计 / 底栏当前会话）。文件夹只改渲染与元数据，不改 cwd、不动磁盘。",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "platform": "web"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "workspace",
+    "session",
+    "sidebar",
+    "folders",
+    "workspace-tree",
+    "drag-and-drop",
+    "recycle-bin",
+    "priority-shadow"
+  ],
+  "engines": {
+    "node": ">=22.15"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.0-rc <5"
+  },
+  "scripts": {
+    "check": "node --check src/index.mjs && node --check src/host.mjs && node --check src/folders.mjs && node --check src/cost.mjs && node --check src/session-files.mjs && node --check src/zstd.mjs && node --check src/util.mjs && node --check client.js && node -e \"import('./src/index.mjs')\"",
+    "test": "node test/apply.test.mjs && node test/folders.test.mjs && node test/files.test.mjs && node test/host.test.mjs && node test/cost.test.mjs",
+    "test:ui": "node test/ui-tree.test.mjs"
+  }
+}
