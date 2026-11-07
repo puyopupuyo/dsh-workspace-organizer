@@ -3,6 +3,15 @@
   "version": "0.5.0",
   "description": "接管 DSH 侧边栏工作区浏览器：工作区 → 文件夹（可折叠，虚拟容器）→ 会话的原生树，另有跨工作区移动、删除项目（回收站 / 仅移除注册 / 彻底删除）与成本展示（文件夹小计 / 工作区总计 / 底栏当前会话）。文件夹只改渲染与元数据，不改 cwd、不动磁盘。",
   "license": "MIT",
+  "author": "puyopupuyo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puyopupuyo/dsh-workspace-organizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/puyopupuyo/dsh-workspace-organizer/issues"
+  },
+  "homepage": "https://github.com/puyopupuyo/dsh-workspace-organizer#readme",
   "type": "module",
   "main": "./src/index.mjs",
   "exports": {
@@ -14,7 +23,9 @@
     "src",
     "client.js",
     "cordis.patch.yml",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "NOTICE"
   ],
   "dsh": {
     "bundle": {

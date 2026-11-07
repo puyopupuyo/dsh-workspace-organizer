@@ -1,0 +1,13 @@
+dsh-workspace-organizer
+Copyright (c) 2026 dsh-workspace-organizer contributors
+
+Portions of this software are derived from the DeepSeek Harness client,
+Copyright (c) 2026 DeepSeek, licensed under the MIT License.
+
+---
+
+说明：本插件的侧边栏行位移（AnimatedRows 风格：cloneNode + inert 退场克隆）与
+槽位座位读回（slots.entriesOfSlot 组装 props）等实现，参考并衍生于 DeepSeek
+Harness 客户端（@deepseek-ai/dsh-client-ui-sidebar、dsh-client-ui-workspace 等）
+的公开行为与结构。上述部分的原始版权归 DeepSeek 所有，以 MIT 许可证发布；
+本仓库整体亦以 MIT 许可证发布，完整许可证文本见 LICENSE。

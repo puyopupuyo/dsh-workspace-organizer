@@ -1,5 +1,9 @@
 # dsh-workspace-organizer
 
+> ⚠️ **仅从 GitHub 安装。** 本项目没有发布到 npm；npm 上若出现同名包 `dsh-workspace-organizer`，与本项目无关，请勿安装。
+>
+> 许可证：MIT（见 [LICENSE](LICENSE)）。部分实现衍生于 DeepSeek Harness 客户端（MIT），归属声明见 [NOTICE](NOTICE)。
+
 编辑 DSH 侧边栏工作区的插件：**接管工作区浏览器**，把「工作区 → 文件夹（可折叠）→ 会话」渲染成原生树；同时提供跨工作区移动会话、删除项目（回收站 / 仅移除注册 / 彻底删除）。
 
 文件夹是**工作区内部的视图层容器**：只改侧边栏渲染与 sidecar 元数据，不改 `Session` 的 `header.cwd`、
@@ -89,7 +93,14 @@
 
 ## 安装
 
-### 本地开发（link）
+### 1. 克隆仓库
+
+```bash
+git clone https://github.com/puyopupuyo/dsh-workspace-organizer.git
+cd dsh-workspace-organizer
+```
+
+### 2. link 进 profile
 
 ```bash
 dsh plugin --profile <name> add link:/path/to/dsh-workspace-organizer
@@ -103,9 +114,15 @@ Windows 上把路径换成盘符写法，例如 `link:E:/path/to/dsh-workspace-o
    `"dsh-workspace-organizer": "link:/path/to/dsh-workspace-organizer"`；
 2. 在 `dsh.profile.bundles` 末尾加 `"dsh-workspace-organizer"`；
 3. 在 profile 目录执行 `pnpm install`；
-4. 重启 DSH（Client 半改动可热载，但首次接管需要重新加载客户端包）。
+4. **完全退出 DSH 再启动**（不是刷新窗口，也不是只重载插件）：Client 半的包名映射在启动时建立，改过 `package.json` 必须冷启动。
 
 `cordis.patch.yml` 会把 Host 半插入插件行，`package.json` 的 `dsh.client` 声明 Client 半的平台与依赖。
+
+### 3. 验证
+
+重启后侧边栏应被本插件接管（工作区标题 + 搜索 + 视图选项）。若仍是官方视图，先看 DevTools（`Ctrl+Shift+I`）Console 里的报错，以及主进程日志里 `[workspace-organizer]` 开头的行。
+
+卸载：`dsh plugin --profile <name> remove dsh-workspace-organizer`，或从 profile 的 `dependencies` / `bundles` 里删掉后 `pnpm install`。已建的文件夹留在 sidecar 里，不会删除任何会话。
 
 ## 数据位置
 
@@ -370,6 +387,20 @@ npm test        # 依次直接运行 test/*.test.mjs（不依赖 node --test）
 node test/ui-tree.test.mjs    # 侧边栏树 + 文件夹 + 拖拽 + 成本小计/工作区总计/底栏徽章 + 降级/卸载的 UI 冒烟
 ```
 
+`test/ui-tree.test.mjs` 需要 `react` / `react-test-renderer`，仓库不附带（见 [CONTRIBUTING.md](CONTRIBUTING.md) 的安装方式）。
+
 无构建步骤：`client.js` 是单文件 Client half，`src/*.mjs` 是纯 ESM Host half。
 `src/folders.mjs` 是文件夹数据层（sidecar + 规范化 + 原子写），`src/host.mjs` 负责会话档案的物理动作，
 `src/cost.mjs` 是成本聚合（外部成本源适配 + 统一会话级缓存 + 文件夹/工作区求和 + 水位增量 + 缓存落盘）。
+
+## 贡献
+
+见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+## 安全
+
+请不要公开提安全问题，按 [SECURITY.md](SECURITY.md) 私下报告。
+
+## 许可证
+
+[MIT](LICENSE)。本插件部分实现衍生于 DeepSeek Harness 客户端（MIT），第三方归属声明见 [NOTICE](NOTICE)。
