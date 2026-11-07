@@ -1,5 +1,11 @@
-# 本地记忆库（SQLite 运行时数据）
+# 本地记忆库（SQLite 运行时数据，含真实会话与用户信息，绝不入库）
 .dsh-meow/
+
+# 参考源码（下载的 npm 包与 asar 提取物，仅本地研究用）
+.ref/
+
+# 一次性 UI 冒烟测试的本地依赖（react / react-test-renderer）
+.tmp-ui/
 
 # 依赖与构建产物
 node_modules/
@@ -15,6 +21,19 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# 环境变量
+# 环境变量与凭据
 .env
-.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+.credentials.yaml
+credentials.json
+auth.json
+.dsh/
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*

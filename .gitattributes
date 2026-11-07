@@ -1,0 +1,19 @@
+# 统一行尾：仓库内一律 LF，避免 Windows 用户提交 CRLF 后 Linux 侧出现混杂。
+* text=auto eol=lf
+
+# 二进制：不做行尾转换，也不做 diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.bmp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.gz binary
+*.zst binary
+*.pdf binary
